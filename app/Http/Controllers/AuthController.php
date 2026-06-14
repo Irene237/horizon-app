@@ -48,6 +48,35 @@ class AuthController extends Controller
             ]
         ], 200);
     }
+    public function register(Request $request)
+{
+    // 1. Validation des données de l'inscription
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|string|email|max:255|unique:users',
+        'password' => 'required|string|min:6',
+        'role' => 'required|string' // admin, vendeur, formateur, etc.
+    ]);
+
+    // 2. Création de l'utilisateur dans la base de données
+    $user = User::create([
+        'name' => $request->name,
+        'email' => $request->email,
+        'password' => Hash::make($request->password), // On crypte le mot de passe !
+        'role' => $request->role,
+    ]);
+
+    // 3. Génération du token pour connecter automatiquement l'utilisateur après inscription
+    $token = $user->createToken('auth_token')->plainTextToken;
+
+    return response()->json([
+        'status' => 'success',
+        'message' => 'Utilisateur enregistré avec succès !',
+        'access_token' => $token,
+        'token_type' => 'Bearer',
+        'user' => $user
+    ], 201); // 201 signifie "Créé avec succès"
+}
 
     /**
      * Gestion de la déconnexion (Révocation du token)

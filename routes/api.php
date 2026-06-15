@@ -37,4 +37,8 @@ Route::middleware('auth:sanctum')->group(function () {
     
     // Module B2 : Point de Vente (POS)
     Route::post('/sales', [SalesController::class, 'store']);
+
+    // Module B3 : Gestion des Clients
+    Route::get('/customers/{id}/orders', [App\Http\Controllers\CustomerController::class, 'orderHistory']);
+    Route::apiResource('customers', App\Http\Controllers\CustomerController::class);
 });

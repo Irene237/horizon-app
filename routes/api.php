@@ -9,6 +9,7 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\TrainingController;
 use App\Http\Controllers\TrainingEnrollmentController;
 use App\Http\Controllers\AttendanceController;
+use App\Http\Controllers\ReportController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -73,4 +74,15 @@ Route::middleware('auth:sanctum')->group(function () {
  Route::post('/training-sessions', [AttendanceController::class, 'storeSession']);
  Route::post('/training-sessions/{id}/attendance', [AttendanceController::class, 'submitAttendance']);
  Route::get('/enrollments/{id}/attendance-rate', [AttendanceController::class, 'getStudentAttendanceRate']);
+
+ // Module E : Rapports
+Route::get('/reports/sales', [ReportController::class, 'salesReport']);
+Route::get('/reports/print-orders', [ReportController::class, 'printOrdersReport']);
+Route::get('/reports/trainings', [ReportController::class, 'trainingReport']);
+
+
+// Routes pour les exports Excel
+Route::get('/reports/sales/export', [ReportController::class, 'exportSales']);
+Route::get('/reports/print-orders/export', [ReportController::class, 'exportPrintOrders']);
+Route::get('/reports/trainings/export', [ReportController::class, 'exportTrainings']);
 });

@@ -13,20 +13,17 @@ class Order extends Model
         'discount',
         'discount_type',
         'total',
-        'payment_mode'
+        'payment_mode',
+        'payment_status'
     ];
 
-    /**
-     * Une commande contient plusieurs lignes d'articles
-     */
+    // Relation vers les lignes de la commande
     public function items()
     {
         return $this->hasMany(OrderItem::class);
     }
 
-    /**
-     * Une commande appartient à un client (nullable si vente anonyme)
-     */
+    // Relation vers le client (indispensable pour la facture !)
     public function customer()
     {
         return $this->belongsTo(Customer::class);

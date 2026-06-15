@@ -13,9 +13,13 @@ class OrderItem extends Model
         'price'
     ];
 
-    /**
-     * Chaque ligne de la commande est liée à un produit
-     */
+    // Relation vers la commande parente
+    public function order()
+    {
+        return $this->belongsTo(Order::class);
+    }
+
+    // Relation vers le produit (indispensable pour récupérer le nom de l'article !)
     public function product()
     {
         return $this->belongsTo(Product::class);

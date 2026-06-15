@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProductController; 
+use App\Http\Controllers\SalesController; 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -13,10 +14,14 @@ Route::get('/user', function (Request $request) {
 
 // --- NOS ROUTES POUR HORIZON APP ---
 
-// 1. Route publique : accessible sans être connecté
+// 1. Routes publiques : accessibles sans être connecté
 Route::post('/login', [AuthController::class, 'login']);
 
 Route::post('/register', [AuthController::class, 'register']);
+
+// Route POS - Téléchargement Facture PDF (Placée ici temporairement pour le test sur Navigateur)
+Route::get('/sales/{id}/invoice', [SalesController::class, 'downloadInvoice']);
+
 
 // 2. Routes protégées : l'utilisateur DOIT avoir un Token valide pour y accéder
 Route::middleware('auth:sanctum')->group(function () {
@@ -28,7 +33,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'getStats']);
     
     // Module B1 : CRUD complet du Catalogue Produits
-    Route::apiResource('products', ProductController::class); // <-- AJOUTÉ : Gère index, store, show, update, destroy automatiquement !
+    Route::apiResource('products', ProductController::class); // : Gère index, store, show, update, destroy automatiquement !
     
-    // C'est ici qu'on ajoutera plus tard les routes pour les ventes, les impressions, etc.
+    // Module B2 : Point de Vente (POS)
+    Route::post('/sales', [SalesController::class, 'store']);
 });

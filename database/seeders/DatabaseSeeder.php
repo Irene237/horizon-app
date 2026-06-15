@@ -11,9 +11,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // On appelle notre UserSeeder pour injecter les 4 rôles d'Horizon Numérique
+        // On appelle nos seeders pour injecter les utilisateurs et le fournisseur par défaut
         $this->call([
             UserSeeder::class,
+            SupplierSeeder::class, 
         ]);
     }
 }

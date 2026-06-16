@@ -1,17 +1,12 @@
-# mobile
+# Horizon App
 
-A new Flutter project.
+Application mobile pour le projet Horizon.
 
-## Getting Started
+## Description
+Application de gestion développée avec Flutter pour l'interface mobile, connectée à une API Laravel.
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Installation
+1. Cloner le dépôt : `git clone https://github.com/Irene237/horizon-app`
+2. Aller dans le dossier mobile : `cd mobile`
+3. Installer les dépendances : `flutter pub get`
+4. Lancer l'application : `flutter run`
